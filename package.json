@@ -6,6 +6,9 @@
     "prestart": "webpack -p",
     "start": "node ./bin/www"
   },
+  "engines": {
+    "node": "7.3.0"
+  },
   "dependencies": {
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
