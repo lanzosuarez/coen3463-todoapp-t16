@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prestart": "webpack -p",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "webpack -p"
   },
   "engines": {
     "node": "7.3.0"
