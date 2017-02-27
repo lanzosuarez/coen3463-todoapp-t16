@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import Tabs from 'muicss/lib/react/tabs';
@@ -7,18 +7,17 @@ import LoginForm from './Login';
 import SignupForm  from './Signup';
 
 class LogRegContainer extends React.Component {
-    constructor(props, context) {
+    constructor(props) {
         super(props);
-        context.router
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(e){
-        console.log('hello', e);
-        this.props.context.push('/signup');
+        this.context.router.push('/signup');
     }
     render() {
-        return (
-            <Tabs justified={true}>
+        console.log(this.context)
+        return(
+             <Tabs justified={true}>
                 <Tab value="login" label="Login" >
                     <LoginForm />
                 </Tab>
@@ -26,7 +25,7 @@ class LogRegContainer extends React.Component {
                     <SignupForm />
                 </Tab>
             </Tabs>
-        );
+        )
     }
 }
 

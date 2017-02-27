@@ -20,8 +20,18 @@ module.exports = {
     },
     module:{
         loaders:[
-            {test: /\.js$/, exclude:'/node_modules', loader:'babel-loader'},
+            {
+                test: /\.js$/,
+                exclude:'/node_modules',
+                loader:'babel-loader',
+                query: {
+                    presets: ['latest', 'react', 'es2015']
+                }
+            },
             {test: /\.css$/, loader:'style-loader!css-loader'}
         ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx']
     },
 }

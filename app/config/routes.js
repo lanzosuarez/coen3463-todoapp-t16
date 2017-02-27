@@ -4,11 +4,12 @@ import App from './../components/App';
 import LogRegContainer from './../components/LogRegContainer';
 
 var routes = (
-    <Router>
-        <Route path='/' component={App}></Route>
-        <Route path ='/login' component={LogRegContainer}></Route>
-        <Route path ='/signup' component={LogRegContainer}></Route>
+    <Router history={browserHistory} >
+        <Route path='/' component={App}>
+            <Route path ='/login' component={LogRegContainer}></Route>
+            <Route path ='/signup' component={LogRegContainer}></Route>
+        </Route>
     </Router>
 )
 
-module.exports = routes;
+export default routes;
