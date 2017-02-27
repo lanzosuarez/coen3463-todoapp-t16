@@ -1,3 +1,14 @@
 import React from 'react';
 import ReactRouter, { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import App from './Components/App';
+import App from './../components/App';
+import LogRegContainer from './../components/LogRegContainer';
+
+var routes = (
+    <Router>
+        <Route path='/' component={App}></Route>
+        <Route path ='/login' component={LogRegContainer}></Route>
+        <Route path ='/signup' component={LogRegContainer}></Route>
+    </Router>
+)
+
+module.exports = routes;
