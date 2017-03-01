@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import LogReg from '../components/LogReg';
 import AuthApi from '../api/AuthApi';
 

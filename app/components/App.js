@@ -18,7 +18,7 @@ class App extends Component{
             <Container fluid={true}>
                 <Row>
                     <Col md="6" md-offset="3">
-                        <LogRegContainer name={"hello"}/>
+                        {this.props.children}
                     </Col>
                 </Row>
             </Container>
