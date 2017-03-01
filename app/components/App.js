@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
 import Col from 'muicss/lib/react/col';
-import LogRegContainer from './LogRegContainer';
+import LogRegContainer from '../container/LogRegContainer';
 
 class App extends Component{
     constructor(props){
@@ -28,7 +28,3 @@ class App extends Component{
 
 
 export default App;
-
-// MyComp.contextTypes = {
-//     router: React.PropTypes.object.isRequired
-// };

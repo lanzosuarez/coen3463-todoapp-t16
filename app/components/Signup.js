@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import Form from 'muicss/lib/react/form';
 import Input from 'muicss/lib/react/input';
@@ -7,33 +7,37 @@ import Button from 'muicss/lib/react/button';
 import Row from 'muicss/lib/react/row';
 import Col from 'muicss/lib/react/col';
 
-
-class SignupForm extends React.Component {
-  render() {
-    return (
-      <Form>
-        <h2>Nice meeting you!</h2>
-        <Row>
-          <Col md="6">
-            <Input label="First Name" floatingLabel={true} />
+function SignupForm(props){
+  return (
+    <Form onSubmit={props.onSignup} onChange={props.onChangeForm}>
+      <h2>Nice meeting you!</h2>
+      <Row>
+        <Col md="6">
+          <Input label="First Name" floatingLabel={true} required={true} />
+        </Col>
+        <Col md="6">
+          <Input label="Last Name" floatingLabel={true}  required={true} />
+        </Col>
+      </Row>
+      <Input label="Email" floatingLabel={true} required={true} type="email" onKeyPress={props.onChangeEmail} />
+      <Input label="Password" type="password" floatingLabel={true} required={true} />
+      <Row>
+          <Col md="6"> 
+              <Button variant="raised">Cancel</Button>
           </Col>
-          <Col md="6">
-            <Input label="Last Name" floatingLabel={true} />
+          <Col md="6"> 
+              <Button variant="raised" type="submit" id="submitButton" >Submit</Button>
           </Col>
-        </Row>
-        <Input label="Email" floatingLabel={true} />
-        <Input label="Password" floatingLabel={true} />
-        <Row>
-            <Col md="6"> 
-                <Button variant="raised">Cancel</Button>
-            </Col>
-            <Col md="6"> 
-                <Button variant="raised">Submit</Button>
-            </Col>
-        </Row>
-       
-      </Form>
-    );
-  }
+      </Row>
+      
+    </Form>
+  );
 }
+
+SignupForm.PropTypes={
+  onSignup: PropTypes.func.isRequired,
+  onChangeEmail: PropTypes.func.isRequired,
+  onChangeForm: PropTypes.func.isRequired
+}
+
 export default SignupForm ;
