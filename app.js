@@ -8,7 +8,8 @@ const express = require('express'),
 
 //routes
 const index = require('./routes/index'),
-    auth = require('./routes/auth');
+    auth = require('./routes/auth'),
+    todo = require('./routes/todo');
 
   //AUTHENTICATION
 const passport = require('passport'),
@@ -71,10 +72,10 @@ require('./passport-init');
 
 //restify
 restify.serve(router, Todo);
-restify.serve(router, User);
 
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/todo', todo);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

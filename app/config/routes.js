@@ -7,6 +7,7 @@ import ToDoContainer from '../container/ToDoContainer';
 var routes = (
     <Router history={browserHistory} >
         <Route path='/' component={App}>
+            <IndexRoute component={LogRegContainer} />
             <Route path ='login' component={LogRegContainer} />
             <Route path ='signup' component={LogRegContainer} />
             <Route path ='test' component={ToDoContainer} />

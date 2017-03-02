@@ -10,7 +10,11 @@ class LogRegContainer extends React.Component {
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangeForm = this.onChangeForm.bind(this);
         this.onLogin = this.onLogin.bind(this);
-        this.onSignup = this.onSignup.bind(this)
+        this.onSignup = this.onSignup.bind(this);
+
+        this.state = {
+            user: {}
+        }
     }
 
     onChangeEmail(e){
@@ -54,7 +58,16 @@ class LogRegContainer extends React.Component {
             password: e.target.elements[1].value
         }
         AuthApi.onLogin(data).then((res)=>{
-            console.log(res.data); //access data here //check the console
+            const data = res.data;
+            if(data.success){
+                this.setState({
+                    user: data.response._id
+                });
+                //window.location = data.redirect;
+                console.log(data);
+                return;
+            }
+            console.log("Login Failed!");
         });
        
     }

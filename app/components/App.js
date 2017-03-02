@@ -10,7 +10,6 @@ class App extends Component{
         this.state={
             count: 1
         }
-        console.log(this.props)
     }
 
     render(){

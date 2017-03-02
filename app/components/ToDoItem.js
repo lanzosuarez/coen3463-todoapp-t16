@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Panel from 'muicss/lib/react/panel';
 import Form from 'muicss/lib/react/form';
 import Container from 'muicss/lib/react/container';
@@ -7,7 +7,7 @@ import Row from 'muicss/lib/react/Row';
 import Col from 'muicss/lib/react/Col';
 import Button from 'muicss/lib/react/Button';
 
-function ToDoItem(){
+function ToDoItem(props){
     return (
         <Panel className="mui--bg-primary-light mui--z2">
              <Container fluid={true} className="mui--text-center">
@@ -15,7 +15,7 @@ function ToDoItem(){
                     <Row>
                         <Col md="10">
                             <Container className="mui--bg-primary-light" >
-                                <h5>Yesss Hello</h5>
+                                <h5>{props.name}</h5>
                             </Container>
                         </Col>
                         <Col md="2">
@@ -30,5 +30,10 @@ function ToDoItem(){
         </Panel>
     )
 }
+
+ToDoItem.PropTypes = {
+    name: PropTypes.string.isRequired
+}
+
 
 export default ToDoItem ;

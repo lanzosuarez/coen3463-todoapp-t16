@@ -5,6 +5,7 @@ const AuthApi = {
     onLogin:(data)=>{
         return axios.post('/auth/login',data)
         .then((res)=>{
+            console.log(res);
             return res;
         }).catch((err)=>{
             return err; 
@@ -17,6 +18,15 @@ const AuthApi = {
         }).catch((err)=>{
             return err;
         });
+    },
+    onGetUser: (data)=>{
+        return axios.get('/auth/getUser')
+            .then((res)=>{
+                console.log(res);
+                return res;
+            }).catch((err)=>{
+                console.log(err);
+            });
     }
 }
 

@@ -23,6 +23,7 @@ router.post('/login', function(req, res, next) {
             title:'Error',
             response:err
           });
+          console.log(req.user);
           res.status(200).json({
             success: true,
             title: 'Success',
@@ -57,6 +58,15 @@ router.post('/signup', function(req, res){
       title: 'Success',
       response: user
     });
+  });
+});
+
+
+router.get('/getUser', (req, res)=>{
+  const user = req.user;
+  console.log(user);
+  res.json({
+    response: user
   });
 });
 
