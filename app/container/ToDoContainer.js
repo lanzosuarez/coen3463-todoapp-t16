@@ -24,9 +24,10 @@ class ToDoContainer extends React.Component{
         let lastItemState = this.state.items; //get last state of items
         if(lastUserState===''){
             AuthApi.onGetUser().then((res)=>{
+                console.log(res)
                 if(res.data.response){
                     this.setState({
-                        user: res.data.response._id
+                        user: res.data.response//access the user using res.data.response.firstName, res.data.reponse.lastName,res/data.username for email
                     });
                     //then getowntodos
                     TodoApi.onGetOwnTodo(res.data.response._id)
@@ -76,14 +77,6 @@ class ToDoContainer extends React.Component{
             }
             alert(res.data.response);
         }); 
-    }
-
-    linetrough(target, flag){
-        if(flag){
-            target.style.textDecoration='line-through';
-            return;
-        }
-         target.style.textDecoration='none';      
     }
 
     handleOnComplete(todo,index){
