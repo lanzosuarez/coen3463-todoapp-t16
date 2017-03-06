@@ -16,10 +16,12 @@ router.get('/',(req,res)=>{
                 response: 'Error retrieving todos' 
             });
         }
-        let filtered = docs.filter(todo=>{
-            todo.user == req.user._id;
-        });
-        console.log(filtered);
+        let filtered=[];
+        for(let x=0;x<docs.length;x++){
+            if(req.user._id.toString()===docs[x].user.toString()){
+                filtered.push(docs[x]);
+            }
+        }
         res.status(200).json({
             todos:filtered
         });
