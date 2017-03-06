@@ -13,14 +13,15 @@ router.get('/',(req,res)=>{
     Todo.find((err,docs)=>{
         if(err){
             return res.json({
-                response:err    
+                response: 'Error retrieving todos' 
             });
         }
-        docs.filter((todo)=>{
-            return todo.user === req.user._id;
+        let filtered = docs.filter(todo=>{
+            todo.user == req.user._id;
         });
+        console.log(filtered);
         res.status(200).json({
-            todos:docs
+            todos:filtered
         });
     });
 });
