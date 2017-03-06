@@ -3,8 +3,8 @@ import LogReg from '../components/LogReg';
 import AuthApi from '../api/AuthApi';
 
 class LogRegContainer extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.handleLogClick = this.handleLogClick.bind(this);
         this.handleSignClick = this.handleSignClick.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -51,6 +51,10 @@ class LogRegContainer extends React.Component {
         this.context.router.push('/login');
     }
 
+    redirect(path){
+        window.location = path;
+    }
+
     onLogin(e){
         e.preventDefault();
         let data = {
@@ -59,15 +63,16 @@ class LogRegContainer extends React.Component {
         }
         AuthApi.onLogin(data).then((res)=>{
             const data = res.data;
-            if(data.success){
+            if(data.success===true){
                 this.setState({
                     user: data.response._id
                 });
-                //window.location = data.redirect;
-                console.log(data);
+                this.redirect(res.data.redirect);
                 return;
             }
-            console.log("Login Failed!");
+            alert(res.data.response);
+        }).catch((err)=>{
+            throw(err);
         });
        
     }
@@ -86,7 +91,13 @@ class LogRegContainer extends React.Component {
             password: elements[3].value
         }
         AuthApi.onSignup(data).then((res)=>{
-            console.log(res.data); //access data here //check the console
+            console.log(res.data.redirect); //access data here //check the console
+            if(res.data.success===false){
+                console.log("onerror");
+                console.log(res.data);
+                return; 
+            }
+            this.redirect(res.data.redirect);
         });
     }
 
@@ -105,7 +116,7 @@ class LogRegContainer extends React.Component {
 }
 
 LogRegContainer.contextTypes = {
-    router: React.PropTypes.object.isRequired
+    router: PropTypes.object.isRequired
 };
 
 export default LogRegContainer;

@@ -8,7 +8,7 @@ const AuthApi = {
             console.log(res);
             return res;
         }).catch((err)=>{
-            return err; 
+            throw(err);
         });
     },
     onSignup:(data)=>{
@@ -16,7 +16,7 @@ const AuthApi = {
         .then((res)=>{
             return res;
         }).catch((err)=>{
-            return err;
+            throw(err);
         });
     },
     onGetUser: (data)=>{
@@ -25,7 +25,7 @@ const AuthApi = {
                 console.log(res);
                 return res;
             }).catch((err)=>{
-                console.log(err);
+                throw(err);
             });
     }
 }

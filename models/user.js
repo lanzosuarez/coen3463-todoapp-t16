@@ -25,7 +25,7 @@ var userSchema = new Schema ({
         minlength: [2, 'Last name is too short'],
         lowercase: true
     },
-    todos: [{type: Schema.Types.ObjectId, ref: 'Message'}]
+    todos: [{type: Schema.Types.ObjectId, ref: 'Todo'}]
 });
 
 userSchema.plugin(passportLocalMongoose);

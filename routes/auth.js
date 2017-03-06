@@ -8,13 +8,14 @@ router.post('/login', function(req, res, next) {
     if (err) return res.status(500).json({
       success:false,
       title:'Error',
-      response:err
+      response: err
     });
     if (user === false) {
-      res.status(401).json({
+      console.log("unauthroized")
+      res.json({
         success: false,
         title: 'Error',
-        response: options.message,
+        response: options.message
       });
     } else {
         req.login(user,(err)=>{
@@ -28,7 +29,7 @@ router.post('/login', function(req, res, next) {
             success: true,
             title: 'Success',
             response: user,
-            redirect:'/'
+            redirect:'/todos'
           });
         });
       }
@@ -53,10 +54,9 @@ router.post('/signup', function(req, res){
       }); 
     }
     console.log("onsuccess")
-    return res.send({
+    return res.status(201).json({
       success: true,
-      title: 'Success',
-      response: user
+      redirect: '/login'
     });
   });
 });

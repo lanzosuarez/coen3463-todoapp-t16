@@ -15,13 +15,24 @@ function ToDoItem(props){
                     <Row>
                         <Col md="10">
                             <Container className="mui--bg-primary-light" >
-                                <h5>{props.name}</h5>
+                                <h5 style={{textDecoration:(props.todo.isCompleted?'line-through':'none')}}
+                                    >{props.todo.name}</h5>
                             </Container>
                         </Col>
                         <Col md="2">
                             <Col>
-                                <Button variant="fab" size="small" color="primary" className="mui--pull-right">x</Button>
-                                <Button variant="fab" size="small" color="danger" className="mui--pull-right">/</Button>
+                                <Button variant="fab" size="small" color="primary" className="mui--pull-right" name="delete"
+                                        onClick={(e)=>{
+                                            e.preventDefault()
+                                            props.onDelete(props.index,props.todo)}
+                                        }>x</Button>
+                                <Button variant="fab" size="small" color="danger" className="mui--pull-right" name="edit">/</Button>
+                                <Button variant="fab" size="small" color="danger" className="mui--pull-right" name="done"
+                                        onClick={(e)=>{
+                                            e.preventDefault()
+                                            props.onClick(props.todo, props.index);
+                                        }}
+                                        >y</Button>
                             </Col>
                         </Col>
                     </Row>
@@ -32,7 +43,10 @@ function ToDoItem(props){
 }
 
 ToDoItem.PropTypes = {
-    name: PropTypes.string.isRequired
+    todo: PropTypes.object.isRequired,
+    onDelete: PropTypes.func.onDelete,
+    index: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired
 }
 
 

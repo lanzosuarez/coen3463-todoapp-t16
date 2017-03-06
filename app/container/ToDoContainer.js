@@ -9,10 +9,48 @@ class ToDoContainer extends React.Component{
     constructor(props){
         super(props);
         this.handleOnAddItem = this.handleOnAddItem.bind(this);
+        this.handleOnDelete = this.handleOnDelete.bind(this);
+        this.handleOnComplete = this.handleOnComplete.bind(this);
         this.state = {
             items:[],
-            user: ''
+            user: '',
         }
+        
+    }
+
+    componentWillMount(){
+        console.log("hello")
+        let lastUserState = this.state.user; //get last state of user
+        let lastItemState = this.state.items; //get last state of items
+        if(lastUserState===''){
+            AuthApi.onGetUser().then((res)=>{
+                if(res.data.response){
+                    this.setState({
+                        user: res.data.response._id
+                    });
+                    //then getowntodos
+                    TodoApi.onGetOwnTodo(res.data.response._id)
+                    .then((todos)=>{
+                        console.log(todos);
+                        this.setState({
+                            items:[...lastItemState,...todos.todos]
+                        });
+                    });
+                }else{
+                    window.location = '/';
+                }
+            });
+        }   
+    }   
+
+    handleOnDelete(index,todo){
+        console.log(todo);
+        let lastItemState = this.state.items;
+        lastItemState.splice(index,1);
+        this.setState({
+            items: [...lastItemState]
+        });
+        TodoApi.onDelete(todo._id);
     }
 
     handleOnAddItem(e) {
@@ -23,64 +61,67 @@ class ToDoContainer extends React.Component{
             user: this.state.user,
             createDate: Date.now(),
         }
-        this.setState({ //update items
-            items :[...lastState,Object.assign({},toDo)]
-        });
-        TodoApi.onAdd(toDo); //then request to add todo
+      
+        TodoApi.onAdd(toDo).then(res=>{
+            if(res.data.success===true){
+                this.setState({ //update items
+                    items :[...lastState,Object.assign({},res.data.response)]
+                });
+                return;
+            }
+            alert(res.data.response);
+        }); 
     }
 
-    getMonth(index){
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-                            "July", "August", "September", "October", "November", "December"
-        ];
-        return monthNames[index];
-    }
-
-    componentDidMount(){
-        let lastUserState = this.state.user; //get last state of user
-        let lastItemState = this.state.items; //get last state of items
-        if(lastUserState!==''){
+    linetrough(target, flag){
+        if(flag){
+            target.style.textDecoration='line-through';
             return;
-        }else{
-            AuthApi.onGetUser().then((res)=>{
-                if(res.data.response){
-                    this.setState({
-                        user: res.data.response._id
-                    });
-                    //then getowntodos
-                    TodoApi.onGetOwnTodo(res.data.response._id)
-                    .then((todos)=>{
-                        this.setState({
-                            items:[...lastItemState,...todos]
-                        })
-                    });
-                }else{
-                    this.props.router.push('/');
-                
-                }
-            });
         }
-           
-    }       
-    
-    render(){
+         target.style.textDecoration='none';      
+    }
+
+    handleOnComplete(todo,index){
+        TodoApi.onEdit(todo._id,"isCompleted",!todo.isCompleted)
+            .then(res=>{
+                console.log(res);
+                if(res.data.success){
+                    let lastItems = this.state.items;
+                    let newItems = lastItems.splice(index,1,res.data.response);
+                    this.setState({
+                        items: [...newItems]
+                    });
+                    return;
+                }
+                alert(res.data.response);
+            });
+    }
+
+    loopTodo(){
         let displayTodo = [];
         for(let x=0; x<this.state.items.length;x++){
             displayTodo.push(
                 <ToDoItem 
                     key={x}
-                    name={this.state.items[x].name}
+                    index={x}
+                    todo={this.state.items[x]}
+                    onDelete={this.handleOnDelete}
                 />
             );
-        }
+        }   
     
+        return displayTodo;
+    }
+    
+    render(){
+        let displayTodo = this.loopTodo();
         return(
-            <div>
-                <ToDoAdd
-                    onAddItem = {this.handleOnAddItem}
-                />
-                {displayTodo}
-            </div>
+            <ToDoAdd
+                onAddItem= {this.handleOnAddItem}
+                todos= {this.state.items}
+                onDeleteTodo= {this.handleOnDelete}
+                onClickTodo= {this.handleOnComplete}
+            />
         );
     }
 }

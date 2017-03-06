@@ -10,7 +10,7 @@ var routes = (
             <IndexRoute component={LogRegContainer} />
             <Route path ='login' component={LogRegContainer} />
             <Route path ='signup' component={LogRegContainer} />
-            <Route path ='test' component={ToDoContainer} />
+            <Route path ='todos' component={ToDoContainer} />
         </Route>
     </Router>
 )
