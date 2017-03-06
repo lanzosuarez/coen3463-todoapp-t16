@@ -15949,7 +15949,9 @@ function ToDoAdd(props) {
                 )
             )
         ),
-        _react2.default.createElement(_Status2.default, null),
+        _react2.default.createElement(_Status2.default, {
+            onClearList: props.onClearListToDo
+        }),
         props.todos.map(function (todo, index) {
             return _react2.default.createElement(_ToDoItem2.default, {
                 key: index,
@@ -15967,7 +15969,8 @@ ToDoAdd.PropTypes = {
     onAddItem: _react.PropTypes.func.isRequired,
     todos: _react.PropTypes.array.isRequired,
     onDeleteTodo: _react.PropTypes.func.isRequired,
-    onClickTodo: _react.PropTypes.func.isRequired
+    onClickTodo: _react.PropTypes.func.isRequired,
+    onClearListToDo: _react.PropTypes.func.isRequired
 };
 
 exports.default = ToDoAdd;
@@ -16137,6 +16140,12 @@ var ToDoContainer = function (_React$Component) {
             });
         }
     }, {
+        key: 'handleOnClearList',
+        value: function handleOnClearList(e) {
+            e.preventDefault();
+            this.setState({ items: [] });
+        }
+    }, {
         key: 'loopTodo',
         value: function loopTodo() {
             console.log(this.state.items);
@@ -16164,7 +16173,8 @@ var ToDoContainer = function (_React$Component) {
                     onAddItem: this.handleOnAddItem,
                     todos: this.state.items,
                     onDeleteTodo: this.handleOnDelete,
-                    onClickTodo: this.handleOnComplete
+                    onClickTodo: this.handleOnComplete,
+                    onClearlistToDo: this.handleOnClearList
                 })
             );
         }
@@ -41745,12 +41755,22 @@ function Status() {
             ),
             _react2.default.createElement(
                 _button2.default,
-                { size: 'small', variant: 'raised', color: 'danger' },
+                { size: 'small', variant: 'raised', color: 'danger',
+                    onClick: function onClick(e) {
+                        e.preventDefault();
+                        props.onCleaList();
+                    }
+                },
                 'Clear List'
             )
         )
     );
 }
+
+Status.PropTypes = {
+    onClearList: _react.PropTypes.func.isRequired
+};
+
 exports.default = Status;
 
 /***/ })

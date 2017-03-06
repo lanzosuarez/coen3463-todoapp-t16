@@ -101,6 +101,10 @@ class ToDoContainer extends React.Component{
                 alert(res.data.response);
             });
     }
+    handleOnClearList(e){
+        e.preventDefault();
+        this.setState({items:[]})
+    }
 
     loopTodo(){
         console.log(this.state.items)
@@ -129,6 +133,7 @@ class ToDoContainer extends React.Component{
                     todos= {this.state.items}
                     onDeleteTodo= {this.handleOnDelete}
                     onClickTodo= {this.handleOnComplete}
+                    onClearlistToDo={this.handleOnClearList}
                 />
             </div>
         );

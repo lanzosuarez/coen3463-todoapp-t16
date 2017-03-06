@@ -27,7 +27,9 @@ function ToDoAdd(props){
                     </Form>
                 </Container>
             </Panel>
-            <Status />
+            <Status 
+                onClearList={props.onClearListToDo}
+            />
             {props.todos.map((todo, index)=>
                 <ToDoItem 
                     key={index}
@@ -45,7 +47,8 @@ ToDoAdd.PropTypes={
     onAddItem: PropTypes.func.isRequired,
     todos: PropTypes.array.isRequired,
     onDeleteTodo: PropTypes.func.isRequired,
-    onClickTodo: PropTypes.func.isRequired
+    onClickTodo: PropTypes.func.isRequired,
+    onClearListToDo:PropTypes.func.isRequired
 }
 
 
