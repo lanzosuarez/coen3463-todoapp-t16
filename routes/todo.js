@@ -73,6 +73,45 @@ router.post('/', (req,res)=>{
     });
 });
 
+router.delete('/deleteAll/:id', (req,res)=>{
+    console.log("here");
+    Todo.find((err,todos)=>{
+        if(err){
+            return res.json({
+                success:false,
+                response: 'Error occured'
+            });
+        }
+        if(!req.user){
+            return res.json({
+                success:false,
+                response: 'Unauthorized'
+            });
+        }
+        todos.map((todo, index)=>{
+            if(todo.user.toString()===req.params.id){
+                todo.remove(err=>{
+                    if(err){
+                        return res.json({
+                            success:false,
+                            response: 'Error occured'
+                        });
+                    }
+                    if(!req.user){
+                        return res.json({
+                            success:false,
+                            response: 'Unauthorized'
+                        });
+                    }
+                });
+            }
+        });
+        res.json({
+            success:true
+        });
+    });
+});
+
 router.delete('/:id',(req,res)=>{
     Todo.findById(req.params.id,(err,todo)=>{
         if(err){
@@ -112,6 +151,7 @@ router.delete('/:id',(req,res)=>{
         });
     });
 });
+
 
 router.patch('/:id/:field/:value', (req, res)=>{
     Todo.findById(req.params.id, (err, todo)=>{

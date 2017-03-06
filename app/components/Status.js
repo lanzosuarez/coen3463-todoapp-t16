@@ -9,9 +9,9 @@ const Status = (props)=>{
         <div id="status">
             <h2>{props.onCompletedCount} / {props.onCount}</h2>
             <div id="buts">
-                <Button size="small" variant="flat">All</Button>
-                <Button size="small" variant="flat" color="primary">Open</Button>
-                <Button size="small" variant="flat" style={completed}>Completed</Button>
+                <Button size="small" variant="flat" onClick={props.onGetAll}>All</Button>
+                <Button size="small" variant="flat" color="primary" onClick={props.onGetOpen}>Open</Button>
+                <Button size="small" variant="flat" style={completed} onClick={props.onGetCompleted}>Completed</Button>
                 <Button size="small" variant="raised" color="danger" onClick={props.onClear}
                 >Clear List</Button>
             </div>
@@ -22,7 +22,10 @@ const Status = (props)=>{
 Status.propTypes={
     onClear: PropTypes.func.isRequired,
     onCount: PropTypes.number.isRequired,
-    onCompletedCount: PropTypes.number.isRequired
+    onCompletedCount: PropTypes.number.isRequired,
+    onGetCompleted: PropTypes.func.isRequired,
+    onGetOpen: PropTypes.func.isRequired,
+    onGetAll: PropTypes.func.isRequired
 }
 
 export default Status;

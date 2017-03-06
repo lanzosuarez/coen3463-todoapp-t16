@@ -5,7 +5,7 @@ let mongoose = require('mongoose'),
 const todoSchema = new Schema({
     name:{
         type: String,
-        required: [true,"Todo is empty"]
+        required: [true,"Try again"]
     },
     user:{
         type: Schema.Types.ObjectId, ref: 'User',

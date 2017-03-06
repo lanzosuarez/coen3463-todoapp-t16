@@ -11,6 +11,7 @@ import Status from './Status';
 
 
 const ToDoAdd = (props)=>{
+    console.log(props.isLoadingItem);
     return (
         <div>
             <Panel>
@@ -21,7 +22,8 @@ const ToDoAdd = (props)=>{
                                 <Input hint="What do you want to do?"/>
                             </Col>
                             <Col md="2">
-                                <Button type="submit" variant="fab" size="small">+</Button>
+                                <Button type="submit" variant="fab" size="small" disabled={props.isLoadingItem}
+                                >{props.isLoadingItem?'...':'+'}</Button>
                             </Col>
                         </Row>
                     </Form>
@@ -29,7 +31,10 @@ const ToDoAdd = (props)=>{
             </Panel>
             <Status onClear={props.onClear}
                     onCount={props.onCount}
-                    onCompletedCount={props.onCompletedCount} />
+                    onCompletedCount={props.onCompletedCount}
+                    onGetCompleted={props.getCompleted}
+                    onGetOpen={props.getOpen}
+                    onGetAll={props.getAll}/>
             {props.todos.map((todo, index)=>
                 <ToDoItem 
                     key={index}
@@ -37,6 +42,8 @@ const ToDoAdd = (props)=>{
                     index={index}
                     todo={todo}
                     onClick={props.onClickTodo}
+                    isLoadingItem={props.isLoadingItem}
+                    isUpdating={props.isUpdating}
                 />
             )};
         </div>
@@ -50,7 +57,12 @@ ToDoAdd.propTypes={
     onClickTodo: PropTypes.func.isRequired,
     onClear: PropTypes.func.isRequired,
     onCount: PropTypes.number.isRequired,
-    onCompletedCount: PropTypes.number.isRequired
+    onCompletedCount: PropTypes.number.isRequired,
+    getCompleted: PropTypes.func.isRequired,
+    getOpen: PropTypes.func.isRequired,
+    getAll: PropTypes.func.isRequired,
+    isLoadingItem: PropTypes.bool.isRequired,
+    isUpdating: PropTypes.bool.isRequired,
 }
 
 

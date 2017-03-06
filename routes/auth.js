@@ -70,4 +70,13 @@ router.get('/getUser', (req, res)=>{
   });
 });
 
+
+router.post('/logout', (req, res)=>{
+  req.logout();
+  req.session.destroy();
+  res.json({
+    redirect:'/'
+  });
+});
+
 module.exports = router;

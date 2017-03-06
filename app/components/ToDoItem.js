@@ -9,7 +9,10 @@ import Button from 'muicss/lib/react/Button';
 
 const ToDoItem= (props)=>{
     return (
-        <Panel className="mui--bg-primary-light mui--z2" style={{backgroundColor:(props.todo.isCompleted?'rgba(255, 255, 0, 0.45)':'#BBDEFB')}}>
+        <Panel className="mui--bg-primary-light mui--z2" style={{
+                backgroundColor:(props.todo.isCompleted?'rgba(255, 255, 0, 0.45)':'#BBDEFB'),
+                opacity:(props.isLoadingItem || props.isUpdating?'0.5':'1')
+            }}>
             <Form>
                 <Row>
                     <Col md="10">
@@ -44,7 +47,9 @@ ToDoItem.propTypes = {
     todo: PropTypes.object.isRequired,
     //onDelete: PropTypes.func.onDelete,
     index: PropTypes.number.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    isLoadingItem: PropTypes.bool.isRequired,
+    isUpdating: PropTypes.bool.isRequired
 }
 
 

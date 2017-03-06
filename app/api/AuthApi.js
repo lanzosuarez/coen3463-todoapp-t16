@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {browserHistory} from 'react-router'
 
 const AuthApi = { 
 
@@ -27,6 +28,15 @@ const AuthApi = {
             }).catch((err)=>{
                 throw(err);
             });
+    },
+    onLogout:()=>{
+        axios.post('/auth/logout').
+        then(res=>{
+            console.log(res);
+            browserHistory.push(res.data.redirect);
+        }).catch(err=>{
+            throw(err);
+        });
     }
 }
 

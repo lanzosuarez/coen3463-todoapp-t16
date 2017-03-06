@@ -8,9 +8,11 @@ var routes = (
     <Router history={browserHistory} >
         <Route path='/' component={App}>
             <IndexRoute component={LogRegContainer} />
+            <Route path ='login/:mode' component={LogRegContainer} />
             <Route path ='login' component={LogRegContainer} />
             <Route path ='signup' component={LogRegContainer} />
             <Route path ='todos' component={ToDoContainer} />
+            <Route path ='todos/:mode' component={ToDoContainer} />
         </Route>
     </Router>
 )

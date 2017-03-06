@@ -16,7 +16,14 @@ var TodoApi = {
                 throw(err);
             });
     },
-
+    onDeleteAll: id=>{
+        return axios.delete('/todo/deleteAll/'+id)
+            .then(res=>{
+                return res;
+            }).catch(err=>{
+                throw(err);
+            });
+    },
     onDelete: id=>{
         console.log(id);
         return axios.delete('/todo/'+id)

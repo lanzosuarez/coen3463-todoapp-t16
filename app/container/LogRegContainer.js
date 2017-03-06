@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import LogReg from '../components/LogReg';
 import AuthApi from '../api/AuthApi';
+import {browserHistory} from 'react-router';
+import toastr from 'toastr';
+import Loading from '../components/Loading';
 
 class LogRegContainer extends React.Component {
     constructor(props, context) {
@@ -13,8 +16,26 @@ class LogRegContainer extends React.Component {
         this.onSignup = this.onSignup.bind(this);
 
         this.state = {
-            user: {}
+            user: {},
+            isLoading: false
         }
+    }
+
+    componentWillMount(){
+        this.setState({isLoading:true});
+        if(this.props.routeParams.mode){
+            this.setState({isLoading:false});
+            toastr.info('Please login first');
+            return;
+        }
+        AuthApi.onGetUser().then(res=>{
+            this.setState({isLoading:false});
+            if(res.data.response){
+                this.context.router.push('/todos');
+            } else {
+                this.context.router.push('/');
+            }
+        });
     }
 
     onChangeEmail(e){
@@ -52,7 +73,7 @@ class LogRegContainer extends React.Component {
     }
 
     redirect(path){
-        window.location = path;
+        browserHistory.push(path);
     }
 
     onLogin(e){
@@ -70,7 +91,7 @@ class LogRegContainer extends React.Component {
                 this.redirect(res.data.redirect);
                 return;
             }
-            alert(res.data.response);
+            toastr.warning(res.data.response);
         }).catch((err)=>{
             throw(err);
         });
@@ -102,6 +123,13 @@ class LogRegContainer extends React.Component {
     }
 
     render() { 
+        if(this.state.isLoading){
+            return(
+                <div>
+                    <Loading />
+                </div>
+            )
+        }
         return(
             <LogReg
                 handleLogClick={this.handleLogClick}

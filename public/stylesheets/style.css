@@ -36,3 +36,41 @@ a {
 }
 
 /*------------END---------------*/
+
+
+.loader-pencil-content  {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.btn {
+  align-items: center;
+  background: #93e2cb;
+  border-radius: 4px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  padding: 1rem;
+  width: 160px;
+}
+
+
+svg#loader-pencil {
+  fill: #3a846e;
+  width: 80px;
+}
+  
+#line {
+  animation: linePencil .8s infinite linear;
+}
+
+@keyframes linePencil {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-150px);
+  }
+}
