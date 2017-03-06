@@ -1,6 +1,7 @@
 import React from 'react';
 import ToDoAdd from '../components/ToDoAdd';
 import ToDoItem from '../components/ToDoItem';
+import Header from '../components/Header';
 import TodoApi from '../api/TodoApi';
 import AuthApi from '../api/AuthApi';
 import _ from 'lodash';
@@ -78,13 +79,13 @@ class ToDoContainer extends React.Component{
         }); 
     }
 
-    linetrough(target, flag){
-        if(flag){
-            target.style.textDecoration='line-through';
-            return;
-        }
-         target.style.textDecoration='none';      
-    }
+    // linetrough(target, flag){
+    //     if(flag){
+    //         target.style.textDecoration='line-through';
+    //         return;
+    //     }
+    //      target.style.textDecoration='none';      
+    // }
 
     handleOnComplete(todo,index){
         let lastItems = this.state.items;
@@ -121,12 +122,15 @@ class ToDoContainer extends React.Component{
     render(){
         let displayTodo = this.loopTodo();
         return(
-            <ToDoAdd
-                onAddItem= {this.handleOnAddItem}
-                todos= {this.state.items}
-                onDeleteTodo= {this.handleOnDelete}
-                onClickTodo= {this.handleOnComplete}
-            />
+            <div>
+                <Header />
+                <ToDoAdd
+                    onAddItem= {this.handleOnAddItem}
+                    todos= {this.state.items}
+                    onDeleteTodo= {this.handleOnDelete}
+                    onClickTodo= {this.handleOnComplete}
+                />
+            </div>
         );
     }
 }

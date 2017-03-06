@@ -25,7 +25,7 @@ function SignupForm(props){
               <Button variant="raised">Cancel</Button>
           </Col>
           <Col md="6"> 
-              <Button variant="raised" type="submit" id="submitButton" >Submit</Button>
+              <Button variant="raised" color="primary" type="submit" id="submitButton" >Submit</Button>
           </Col>
       </Row>
       

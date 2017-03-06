@@ -7,3 +7,32 @@ body {
 a {
   color: #00B7FF;
 }
+
+/*-----------STATUS-------------*/
+#buts{
+  position: relative; 
+  top: -47px; 
+  float: right;
+}
+#status{
+  height: 46px;
+  padding-top: 1px;
+  padding-bottom: 51px;
+}
+
+/*------------END---------------*/
+/*-----------HEADER-------------*/
+#s1{
+  padding-bottom: 44px; 
+  color: rgb(205, 217, 226);
+}
+#s2{
+  font-weight: 100; 
+  font-size: 100px; 
+  line-height: 40px
+}
+#name{
+  padding: 23px 0px;
+}
+
+/*------------END---------------*/

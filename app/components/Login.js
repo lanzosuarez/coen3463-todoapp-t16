@@ -9,7 +9,6 @@ import Col from 'muicss/lib/react/col';
 
 
 function LoginForm(props){
-
     return (
       <Form onSubmit={props.onLogin}>
         <h2>Welcome Back!</h2>
@@ -20,7 +19,7 @@ function LoginForm(props){
                 <Button variant="raised">Cancel</Button>
             </Col>
             <Col md="6"> 
-                <Button variant="raised" type="submit">Login</Button>
+                <Button variant="raised" color="primary" type="submit">Login</Button>
             </Col>
         </Row>
       </Form>
