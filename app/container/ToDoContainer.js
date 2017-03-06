@@ -46,11 +46,16 @@ class ToDoContainer extends React.Component{
     handleOnDelete(index,todo){
         console.log(todo);
         let lastItemState = this.state.items;
-        lastItemState.splice(index,1);
-        this.setState({
-            items: [...lastItemState]
+        TodoApi.onDelete(todo._id).then(res=>{
+            if(res.data.success){
+                lastItemState.splice(index,1);
+                this.setState({
+                    items: [...lastItemState]
+                });
+                return;
+            }
+            alert(res.data.response);
         });
-        TodoApi.onDelete(todo._id);
     }
 
     handleOnAddItem(e) {
@@ -63,7 +68,7 @@ class ToDoContainer extends React.Component{
         }
       
         TodoApi.onAdd(toDo).then(res=>{
-            if(res.data.success===true){
+            if(res.data.success){
                 this.setState({ //update items
                     items :[...lastState,Object.assign({},res.data.response)]
                 });
@@ -82,14 +87,13 @@ class ToDoContainer extends React.Component{
     }
 
     handleOnComplete(todo,index){
+        let lastItems = this.state.items;
         TodoApi.onEdit(todo._id,"isCompleted",!todo.isCompleted)
             .then(res=>{
-                console.log(res);
                 if(res.data.success){
-                    let lastItems = this.state.items;
-                    let newItems = lastItems.splice(index,1,res.data.response);
+                    lastItems.splice(index,1,res.data.response);
                     this.setState({
-                        items: [...newItems]
+                        items: [...lastItems]
                     });
                     return;
                 }
@@ -98,6 +102,7 @@ class ToDoContainer extends React.Component{
     }
 
     loopTodo(){
+        console.log(this.state.items)
         let displayTodo = [];
         for(let x=0; x<this.state.items.length;x++){
             displayTodo.push(

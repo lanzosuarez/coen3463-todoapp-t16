@@ -21,11 +21,7 @@ var TodoApi = {
         console.log(id);
         return axios.delete('/todo/'+id)
             .then(todo=>{
-                if(todo.data.success===true){
-                    alert("Deleted");
-                    return;
-                }
-                console.log(todo.data.response);
+                return todo;
 
             }).catch(err=>{
                 throw(err);

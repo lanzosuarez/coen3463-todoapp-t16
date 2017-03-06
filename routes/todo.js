@@ -37,7 +37,7 @@ router.post('/', (req,res)=>{
              return res.json({
                 success: false,
                 title: 'Error',
-                response: err
+                response: 'Error occured'
             });
         }
         console.log("user found");
@@ -76,7 +76,7 @@ router.delete('/:id',(req,res)=>{
            return res.json({
                 success: false,
                 title: 'Error',
-                response: err
+                response: 'Error occured'
             });
         }
         if(!todo){
@@ -98,7 +98,7 @@ router.delete('/:id',(req,res)=>{
                 return res.json({
                     success: false,
                     title: 'Error',
-                    response: err
+                    response: 'Error occured'
                 }); 
             }
             res.status(200).json({
