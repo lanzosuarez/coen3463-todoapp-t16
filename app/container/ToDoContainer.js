@@ -16,6 +16,7 @@ class ToDoContainer extends React.Component{
         this.state = {
             items:[],
             user: '',
+            completedCount: 0
         }
         
     }
@@ -81,12 +82,14 @@ class ToDoContainer extends React.Component{
 
     handleOnComplete(todo,index){
         let lastItems = this.state.items;
+        //lastItems[index].completed = !lastItems[index].completed;
         TodoApi.onEdit(todo._id,"isCompleted",!todo.isCompleted)
             .then(res=>{
                 if(res.data.success){
                     lastItems.splice(index,1,res.data.response);
                     this.setState({
-                        items: [...lastItems]
+                        items: [...lastItems],
+                        completedCount: todo.isCompleted ? this.state.completedCount - 1 : this.state.completedCount + 1
                     });
                     return;
                 }
@@ -97,7 +100,7 @@ class ToDoContainer extends React.Component{
     handleClearList(e){
         this.setState({items:[]});
     }
-    
+
     render(){
         return(
             <div>
@@ -108,6 +111,8 @@ class ToDoContainer extends React.Component{
                     onDeleteTodo= {this.handleOnDelete}
                     onClickTodo= {this.handleOnComplete}
                     onClear= {this.handleClearList}
+                    onCount={this.state.items.length}
+                    onCompletedCount={this.state.completedCount}
                 />
             </div>
         );

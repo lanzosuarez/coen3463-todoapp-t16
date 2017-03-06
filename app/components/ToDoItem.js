@@ -42,7 +42,7 @@ const ToDoItem= (props)=>{
 
 ToDoItem.propTypes = {
     todo: PropTypes.object.isRequired,
-    onDelete: PropTypes.func.onDelete,
+    //onDelete: PropTypes.func.onDelete,
     index: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired
 }

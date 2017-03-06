@@ -7,7 +7,7 @@ const Status = (props)=>{
     let completed={color:"#ffb300"}
     return(
         <div id="status">
-            <h2>3 / 40</h2>
+            <h2>{props.onCompletedCount} / {props.onCount}</h2>
             <div id="buts">
                 <Button size="small" variant="flat">All</Button>
                 <Button size="small" variant="flat" color="primary">Open</Button>
@@ -20,7 +20,9 @@ const Status = (props)=>{
 }
 
 Status.propTypes={
-    onClear: PropTypes.func.isRequired
+    onClear: PropTypes.func.isRequired,
+    onCount: PropTypes.number.isRequired,
+    onCompletedCount: PropTypes.number.isRequired
 }
 
 export default Status;

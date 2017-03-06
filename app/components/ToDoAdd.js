@@ -27,7 +27,9 @@ const ToDoAdd = (props)=>{
                     </Form>
                 </Container>
             </Panel>
-            <Status onClear={props.onClear} />
+            <Status onClear={props.onClear}
+                    onCount={props.onCount}
+                    onCompletedCount={props.onCompletedCount} />
             {props.todos.map((todo, index)=>
                 <ToDoItem 
                     key={index}
@@ -46,7 +48,9 @@ ToDoAdd.propTypes={
     todos: PropTypes.array.isRequired,
     onDeleteTodo: PropTypes.func.isRequired,
     onClickTodo: PropTypes.func.isRequired,
-    onClear: PropTypes.func.isRequired
+    onClear: PropTypes.func.isRequired,
+    onCount: PropTypes.number.isRequired,
+    onCompletedCount: PropTypes.number.isRequired
 }
 
 
