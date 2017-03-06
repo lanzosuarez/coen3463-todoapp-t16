@@ -7,10 +7,10 @@ import Row from 'muicss/lib/react/Row';
 import Col from 'muicss/lib/react/Col';
 import Button from 'muicss/lib/react/Button';
 import ToDoItem from '../components/ToDoItem';
+import Status from '../components/Status';
 
 
 function ToDoAdd(props){
-
     return (
         <div>
             <Panel>
@@ -27,6 +27,9 @@ function ToDoAdd(props){
                     </Form>
                 </Container>
             </Panel>
+            <Status 
+                onClearList={props.onClearListToDo}
+            />
             {props.todos.map((todo, index)=>
                 <ToDoItem 
                     key={index}
@@ -44,7 +47,8 @@ ToDoAdd.PropTypes={
     onAddItem: PropTypes.func.isRequired,
     todos: PropTypes.array.isRequired,
     onDeleteTodo: PropTypes.func.isRequired,
-    onClickTodo: PropTypes.func.isRequired
+    onClickTodo: PropTypes.func.isRequired,
+    onClearListToDo:PropTypes.func.isRequired
 }
 
 

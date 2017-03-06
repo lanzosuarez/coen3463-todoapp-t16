@@ -1,6 +1,7 @@
 import React from 'react';
 import ToDoAdd from '../components/ToDoAdd';
 import ToDoItem from '../components/ToDoItem';
+import Header from '../components/Header';
 import TodoApi from '../api/TodoApi';
 import AuthApi from '../api/AuthApi';
 import _ from 'lodash';
@@ -24,7 +25,6 @@ class ToDoContainer extends React.Component{
         let lastItemState = this.state.items; //get last state of items
         if(lastUserState===''){
             AuthApi.onGetUser().then((res)=>{
-                console.log(res)
                 if(res.data.response){
                     this.setState({
                         user: res.data.response//access the user using res.data.response.firstName, res.data.reponse.lastName,res/data.username for email
@@ -32,7 +32,6 @@ class ToDoContainer extends React.Component{
                     //then getowntodos
                     TodoApi.onGetOwnTodo(res.data.response._id)
                     .then((todos)=>{
-                        console.log(todos);
                         this.setState({
                             items:[...lastItemState,...todos.todos]
                         });
@@ -93,6 +92,10 @@ class ToDoContainer extends React.Component{
                 alert(res.data.response);
             });
     }
+    handleOnClearList(e){
+        e.preventDefault();
+        this.setState({items:[]})
+    }
 
     loopTodo(){
         console.log(this.state.items)
@@ -114,12 +117,16 @@ class ToDoContainer extends React.Component{
     render(){
         let displayTodo = this.loopTodo();
         return(
-            <ToDoAdd
-                onAddItem= {this.handleOnAddItem}
-                todos= {this.state.items}
-                onDeleteTodo= {this.handleOnDelete}
-                onClickTodo= {this.handleOnComplete}
-            />
+            <div>
+                <Header />
+                <ToDoAdd
+                    onAddItem= {this.handleOnAddItem}
+                    todos= {this.state.items}
+                    onDeleteTodo= {this.handleOnDelete}
+                    onClickTodo= {this.handleOnComplete}
+                    onClearlistToDo={this.handleOnClearList}
+                />
+            </div>
         );
     }
 }
