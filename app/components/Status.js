@@ -3,7 +3,7 @@ import Divider from 'muicss/lib/react/divider';
 import Button from 'muicss/lib/react/button';
 
 
-function Status(){
+function Status(props){
     let completed={color:"#ffb300"}
 
     return(
@@ -14,10 +14,7 @@ function Status(){
                 <Button size="small" variant="flat" color="primary">Open</Button>
                 <Button size="small" variant="flat" style={completed}>Completed</Button>
                 <Button size="small" variant="raised" color="danger"
-                    onClick={(e)=>{
-                        e.preventDefault()
-                        props.onCleaList()
-                    }}
+                    onClick={props.onClearList}
                 >Clear List</Button>
             </div>
         </div>

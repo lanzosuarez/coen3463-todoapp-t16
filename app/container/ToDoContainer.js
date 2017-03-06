@@ -12,6 +12,7 @@ class ToDoContainer extends React.Component{
         this.handleOnAddItem = this.handleOnAddItem.bind(this);
         this.handleOnDelete = this.handleOnDelete.bind(this);
         this.handleOnComplete = this.handleOnComplete.bind(this);
+        this.handleOnClearList = this.handleOnClearList.bind(this);
         this.state = {
             items:[],
             user: '',
@@ -95,6 +96,7 @@ class ToDoContainer extends React.Component{
     handleOnClearList(e){
         e.preventDefault();
         this.setState({items:[]})
+        console.log(this.state.items) 
     }
 
     loopTodo(){
