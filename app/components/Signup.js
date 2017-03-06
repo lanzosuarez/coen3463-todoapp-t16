@@ -6,7 +6,7 @@ import Button from 'muicss/lib/react/button';
 import Row from 'muicss/lib/react/row';
 import Col from 'muicss/lib/react/col';
 
-function SignupForm(props){
+const SignupForm = (props)=>{
   return (
     <Form onSubmit={props.onSignup} onChange={props.onChangeForm}>
       <h2>Nice meeting you!</h2>

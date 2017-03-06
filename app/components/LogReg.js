@@ -4,7 +4,7 @@ import Tab from 'muicss/lib/react/tab';
 import LoginForm from '../components/Login';
 import SignupForm  from '../components/Signup';
 
-function LogReg(props){
+const LogReg = (props)=>{
     return(
          <Tabs justified={true}>
             <Tab value="login" label="Login" onActive={props.handleLogClick}>
@@ -22,7 +22,7 @@ function LogReg(props){
     );
 }
 
-LogReg.PropTypes = {
+LogReg.propTypes = {
     onLogin: PropTypes.func.isRequired,
     onSignup: PropTypes.func.isRequired,
     onChangeEmail: PropTypes.func.isRequired,

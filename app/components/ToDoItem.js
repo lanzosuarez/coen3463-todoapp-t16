@@ -7,7 +7,7 @@ import Row from 'muicss/lib/react/Row';
 import Col from 'muicss/lib/react/Col';
 import Button from 'muicss/lib/react/Button';
 
-function ToDoItem(props){
+const ToDoItem= (props)=>{
     return (
         <Panel className="mui--bg-primary-light mui--z2" style={{backgroundColor:(props.todo.isCompleted?'rgba(255, 255, 0, 0.45)':'#BBDEFB')}}>
             <Form>
@@ -40,7 +40,7 @@ function ToDoItem(props){
     )
 }
 
-ToDoItem.PropTypes = {
+ToDoItem.propTypes = {
     todo: PropTypes.object.isRequired,
     onDelete: PropTypes.func.onDelete,
     index: PropTypes.number.isRequired,

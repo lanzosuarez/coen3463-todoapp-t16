@@ -8,7 +8,7 @@ import Row from 'muicss/lib/react/row';
 import Col from 'muicss/lib/react/col';
 
 
-function LoginForm(props){
+const LoginForm= (props)=>{
     return (
       <Form onSubmit={props.onLogin}>
         <h2>Welcome Back!</h2>
@@ -26,7 +26,7 @@ function LoginForm(props){
     );
 }
 
-LoginForm.PropTypes={
+LoginForm.propTypes={
   onLogin: PropTypes.func.isRequired
 }
 

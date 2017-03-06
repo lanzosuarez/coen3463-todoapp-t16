@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import Button from 'muicss/lib/react/button';
 import Divider from 'muicss/lib/react/divider';
 
-function Header(){
+const Header = ()=>{
     let s3 = {position: "relative", float: "right", top: "-17px"}
     
     return(

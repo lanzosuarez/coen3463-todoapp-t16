@@ -3,9 +3,8 @@ import Divider from 'muicss/lib/react/divider';
 import Button from 'muicss/lib/react/button';
 
 
-function Status(props){
+const Status = (props)=>{
     let completed={color:"#ffb300"}
-
     return(
         <div id="status">
             <h2>3 / 40</h2>
@@ -13,16 +12,15 @@ function Status(props){
                 <Button size="small" variant="flat">All</Button>
                 <Button size="small" variant="flat" color="primary">Open</Button>
                 <Button size="small" variant="flat" style={completed}>Completed</Button>
-                <Button size="small" variant="raised" color="danger"
-                    onClick={props.onClearList}
+                <Button size="small" variant="raised" color="danger" onClick={props.onClear}
                 >Clear List</Button>
             </div>
         </div>
     )
 }
 
-Status.PropTypes={
-    onClearList: PropTypes.func.isRequired,
+Status.propTypes={
+    onClear: PropTypes.func.isRequired
 }
 
 export default Status;

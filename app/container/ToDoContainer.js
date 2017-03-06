@@ -12,7 +12,7 @@ class ToDoContainer extends React.Component{
         this.handleOnAddItem = this.handleOnAddItem.bind(this);
         this.handleOnDelete = this.handleOnDelete.bind(this);
         this.handleOnComplete = this.handleOnComplete.bind(this);
-        this.handleOnClearList = this.handleOnClearList.bind(this);
+        this.handleClearList = this.handleClearList.bind(this);
         this.state = {
             items:[],
             user: '',
@@ -93,31 +93,12 @@ class ToDoContainer extends React.Component{
                 alert(res.data.response);
             });
     }
-    handleOnClearList(e){
-        e.preventDefault();
-        this.setState({items:[]})
-        console.log(this.state.items) 
-    }
 
-    loopTodo(){
-        console.log(this.state.items)
-        let displayTodo = [];
-        for(let x=0; x<this.state.items.length;x++){
-            displayTodo.push(
-                <ToDoItem 
-                    key={x}
-                    index={x}
-                    todo={this.state.items[x]}
-                    onDelete={this.handleOnDelete}
-                />
-            );
-        }   
-    
-        return displayTodo;
+    handleClearList(e){
+        this.setState({items:[]});
     }
     
     render(){
-        let displayTodo = this.loopTodo();
         return(
             <div>
                 <Header />
@@ -126,13 +107,11 @@ class ToDoContainer extends React.Component{
                     todos= {this.state.items}
                     onDeleteTodo= {this.handleOnDelete}
                     onClickTodo= {this.handleOnComplete}
-                    onClearlistToDo={this.handleOnClearList}
+                    onClear= {this.handleClearList}
                 />
             </div>
         );
     }
 }
-
-
 
 export default ToDoContainer;
