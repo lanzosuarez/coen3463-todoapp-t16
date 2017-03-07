@@ -10,8 +10,8 @@ const Header = (props)=>{
                 <p id="s2">todos</p>
             </div>
             <div id="name">
-                <span>Content 1&nbsp;</span>
-                <span className="mui--divider-left mui--text-dark-secondary" >&nbsp;Content 2</span>
+                <span>{props.user.firstName}&nbsp;</span>
+                <span className="mui--divider-left mui--text-dark-secondary" id="username" >&nbsp;{props.user.username}</span>
                 <Button size="small" variant="raised" style={s3} color="primary" onClick={props.onLogout}>Logout</Button>
             </div>
         </div>
@@ -19,6 +19,6 @@ const Header = (props)=>{
 };
 
 Header.propTypes={
-    onLogout: PropTypes.func.isRequired
+    onLogout: PropTypes.func.isRequired,
 };
 export default Header;

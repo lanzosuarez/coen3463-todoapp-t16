@@ -219,28 +219,29 @@ class ToDoContainer extends React.Component{
     render(){
         if(this.state.isLoading===true){
             return <Loading />;
+        } else {
+            return(
+                <div>
+                    <Header
+                        onLogout={this.handleLogout}
+                        user={this.state.user}/>
+                    <ToDoAdd
+                        onAddItem= {this.handleOnAddItem}
+                        todos= {this.state.items}
+                        onDeleteTodo= {this.handleOnDelete}
+                        onClickTodo= {this.handleOnComplete}
+                        onClear= {this.handleClearList}
+                        onCount={this.state.count}
+                        onCompletedCount={this.state.completedCount}
+                        isLoadingItem={this.state.isLoadingItem}
+                        getCompleted={this.handleGetCompleted}
+                        getOpen={this.handleGetOpen}
+                        getAll={this.handleGetAll}
+                        isUpdating={this.state.isUpdating}
+                    />
+                </div>
+            );
         }
-        return(
-            <div>
-                <Header
-                    onLogout={this.handleLogout}/>
-                <ToDoAdd
-                    onAddItem= {this.handleOnAddItem}
-                    todos= {this.state.items}
-                    onDeleteTodo= {this.handleOnDelete}
-                    onClickTodo= {this.handleOnComplete}
-                    onClear= {this.handleClearList}
-                    onCount={this.state.count}
-                    onCompletedCount={this.state.completedCount}
-                    isLoadingItem={this.state.isLoadingItem}
-                    getCompleted={this.handleGetCompleted}
-                    getOpen={this.handleGetOpen}
-                    getAll={this.handleGetAll}
-                    isUpdating={this.state.isUpdating}
-                   
-                />
-            </div>
-        );
     }
 }
 
