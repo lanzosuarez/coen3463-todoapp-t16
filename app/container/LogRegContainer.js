@@ -48,7 +48,6 @@ class LogRegContainer extends React.Component {
     }
 
     onChangeForm(e){
-        console.log(e.currentTarget.elements);
         let invalidFlag=false;
         let button = e.currentTarget.elements[5];
         for(var x=0; x<e.currentTarget.elements.length-2;x++){
@@ -113,13 +112,11 @@ class LogRegContainer extends React.Component {
             password: elements[3].value
         }
         AuthApi.onSignup(data).then((res)=>{
-            console.log(res.data.redirect); //access data here //check the console
             if(res.data.success===false){
-                console.log("onerror");
-                 toastr.error(res.data);
+                toastr.error(res.data.response.message);
                 return; 
             }
-            this.redirect(res.data.redirect);
+            window.location = res.data.redirect;
         }).catch((err)=>{
             toastr.error('Oooop! Try again!');
             throw(err);

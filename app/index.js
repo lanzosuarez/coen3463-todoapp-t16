@@ -6,5 +6,5 @@ import '../node_modules/toastr/build/toastr.min.css';
 ReactDom.render(
     routes,
     document.getElementById('app')
-)
+);
 
