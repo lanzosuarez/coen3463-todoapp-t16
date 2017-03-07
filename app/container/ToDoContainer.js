@@ -231,7 +231,7 @@ class ToDoContainer extends React.Component{
                         onDeleteTodo= {this.handleOnDelete}
                         onClickTodo= {this.handleOnComplete}
                         onClear= {this.handleClearList}
-                        onCount={this.state.count}
+                        onCount={this.state.items.length}
                         onCompletedCount={this.state.completedCount}
                         isLoadingItem={this.state.isLoadingItem}
                         getCompleted={this.handleGetCompleted}
