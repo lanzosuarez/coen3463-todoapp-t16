@@ -93,6 +93,7 @@ class LogRegContainer extends React.Component {
             }
             toastr.warning(res.data.response);
         }).catch((err)=>{
+            toastr.error('Error logging in');
             throw(err);
         });
        
@@ -115,11 +116,14 @@ class LogRegContainer extends React.Component {
             console.log(res.data.redirect); //access data here //check the console
             if(res.data.success===false){
                 console.log("onerror");
-                console.log(res.data);
+                 toastr.error(res.data);
                 return; 
             }
             this.redirect(res.data.redirect);
-        });
+        }).catch((err)=>{
+            toastr.error('Oooop! Try again!');
+            throw(err);
+        });;
     }
 
     render() { 

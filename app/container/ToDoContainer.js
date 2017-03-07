@@ -108,6 +108,8 @@ class ToDoContainer extends React.Component{
             }
             this.setState({isLoadingItem:false});
             toastr.error(res.data.response);
+        }).catch(err=>{
+            toastr.error('Ooops! Try again');
         }); 
     }
 
@@ -128,11 +130,14 @@ class ToDoContainer extends React.Component{
                         completedCount: todo.isCompleted ? this.state.completedCount - 1 : this.state.completedCount + 1,
                         isUpdating: false
                     });
+                    toastr.success('Great! You just completed a todo');
                     return;
                 }
-                 this.setState({isUpdating:false});
-                alert(res.data.response);
-            });
+                this.setState({isUpdating:false});
+                toastr.error(res.data.response);
+            }).catch(err=>{
+                toastr.error('Ooops! Try again');
+            });;
     }
 
     setAll(res){
@@ -156,6 +161,8 @@ class ToDoContainer extends React.Component{
         .then(res=>{
             this.setAll(res);
             this.setState({isUpdating:false});
+        }).catch(err=>{
+            toastr.error('Ooops! Try again');
         });
     }
 
@@ -166,6 +173,8 @@ class ToDoContainer extends React.Component{
         .then(res=>{
             this.setState({isUpdating:false});
             this.setComplete(res);
+        }).catch(err=>{
+             toastr.error('Ooops! Try again');
         });
     }
 
@@ -176,6 +185,8 @@ class ToDoContainer extends React.Component{
         .then(res=>{
             this.setState({isUpdating:false});
             this.setOpen(res);
+        }).catch(err=>{
+            toastr.error('Ooops! Try again');
         });
     }
 
@@ -187,13 +198,17 @@ class ToDoContainer extends React.Component{
                 toastr.success("All todo was removed");
                 this.setState({
                     items: [],
-                    isUpdating:false
+                    isUpdating: false,
+                    count: 0,
+                    completedCount: 0
                 });
 
                 return;
             }
             this.setState({isUpdating:falses});
             toastr.error(res.data.response);
+        }).catch(err=>{
+             toastr.error('Ooops! Try again');
         });
     }
 
