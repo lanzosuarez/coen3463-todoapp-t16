@@ -45,7 +45,7 @@ class ToDoContainer extends React.Component{
                     TodoApi.onGetOwnTodo(res.data.response._id)
                     .then((todos)=>{
                         const completedCount = todos.todos.filter(todo=>todo.isCompleted===true);
-                        console.log(completedCount);
+                        console.log(todos.todos.length);
                         this.setState({
                             completedCount:completedCount.length,
                             count: todos.todos.length
@@ -78,8 +78,14 @@ class ToDoContainer extends React.Component{
                 lastItemState.splice(index,1);
                 this.setState({
                     items: [...lastItemState],
-                    isUpdating: false
+                    isUpdating: false,
+                    count: this.state.count-1<1?0:this.state.count-1,
                 });
+                if(this.state.count-1===0){
+                    this.setState({
+                        completedCount:0
+                    })
+                }
                 return;
             }
             this.setState({isUpdating: false});
@@ -103,10 +109,10 @@ class ToDoContainer extends React.Component{
                     items :[...lastState,Object.assign({},res.data.response)]
                 });
                 toastr.success("Todo added");
-                this.setState({isLoadingItem:false});
+                this.setState({isLoadingItem:false,count:this.state.count+1});
                 return;
             }
-            this.setState({isLoadingItem:false});
+            this.setState({isLoadingItem:false,count:this.state.count+1});
             toastr.error(res.data.response);
         }).catch(err=>{
             toastr.error('Ooops! Try again');
@@ -231,7 +237,7 @@ class ToDoContainer extends React.Component{
                         onDeleteTodo= {this.handleOnDelete}
                         onClickTodo= {this.handleOnComplete}
                         onClear= {this.handleClearList}
-                        onCount={this.state.items.length}
+                        onCount={this.state.count}
                         onCompletedCount={this.state.completedCount}
                         isLoadingItem={this.state.isLoadingItem}
                         getCompleted={this.handleGetCompleted}

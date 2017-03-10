@@ -13,7 +13,7 @@ const SignupForm = (props)=>{
       <Row>
         <Col md="6">
           <Input label="First Name" floatingLabel={true} required={true} />
-        </Col>
+        </Col>  
         <Col md="6">
           <Input label="Last Name" floatingLabel={true}  required={true} />
         </Col>
