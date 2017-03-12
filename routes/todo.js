@@ -2,6 +2,7 @@ var express = require('express'),
     router = express.Router(),
     Todo = require('../models/todos'),
     User = require('../models/user');
+    _ = require('lodash');
 
 
 // router.get('/add', (req,res)=>{
@@ -90,25 +91,30 @@ router.delete('/deleteAll/:id', (req,res)=>{
         }
         todos.map((todo, index)=>{
             if(todo.user.toString()===req.params.id){
-                todo.remove(err=>{
-                    if(err){
-                        return res.json({
-                            success:false,
-                            response: 'Error occured'
-                        });
-                    }
-                    if(!req.user){
-                        return res.json({
-                            success:false,
-                            response: 'Unauthorized'
-                        });
-                    }
-                });
+                if(todo.isCompleted===true){
+                    todo.remove(err=>{
+                        if(err){
+                            return res.json({
+                                success:false,
+                                response: 'Error occured'
+                            });
+                        }
+                        if(!req.user){
+                            return res.json({
+                                success:false,
+                                response: 'Unauthorized'
+                            });
+                        }
+                    });
+                }
             }
         });
-        res.json({
-            success:true
-        });
+        Todo.find((err,todos)=>{
+            res.json({
+                success:true,
+                todo: todos
+            });
+        }); 
     });
 });
 

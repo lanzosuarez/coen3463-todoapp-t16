@@ -17,8 +17,12 @@ const todoSchema = new Schema({
 });
 
 todoSchema.post('remove', (todo)=>{  //everytime a remove is called
+    console.log("removing");
+    console.log(todo);
     User.findById(todo.user, function (err, user) {  //grab the to then query the user
-        user.todos.pull(todo); //pull the todo from the todos of the user
+        console.log(user)
+        user.todos.splice(user.todos.indexOf(todo._id),1); //pull the todo from the todos of the user
+        console.log(user)
         user.save(); //then save
     });
 });

@@ -200,15 +200,15 @@ class ToDoContainer extends React.Component{
         this.setState({isUpdating:true});
         TodoApi.onDeleteAll(this.state.user._id)
         .then(res=>{
+            console.log(res.data.todo)
             if(res.data.success){
-                toastr.success("All todo was removed");
+                toastr.success("Completed removed");
                 this.setState({
-                    items: [],
+                    items: [...res.data.todo],
                     isUpdating: false,
-                    count: 0,
-                    completedCount: 0
+                    completedCount:0,
+                    count: res.data.todo.length
                 });
-
                 return;
             }
             this.setState({isUpdating:falses});

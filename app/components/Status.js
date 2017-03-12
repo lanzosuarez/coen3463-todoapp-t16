@@ -13,7 +13,7 @@ const Status = (props)=>{
                 <Button size="small" variant="flat" color="primary" onClick={props.onGetOpen}>Open</Button>
                 <Button size="small" variant="flat" style={completed} onClick={props.onGetCompleted}>Completed</Button>
                 <Button size="small" variant="raised" color="danger" onClick={props.onClear}
-                >Clear List</Button>
+                >Clear Completed</Button>
             </div>
         </div>
     )
