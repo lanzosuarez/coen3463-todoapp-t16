@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import ReactDom from 'react-dom';
 import ToDoAdd from '../components/ToDoAdd';
 import ToDoItem from '../components/ToDoItem';
 import Header from '../components/Header';
@@ -7,6 +8,8 @@ import AuthApi from '../api/AuthApi';
 import _ from 'lodash';
 import toastr from 'toastr';
 import Loading from '../components/Loading';
+import $ from 'jquery';
+
 
 class ToDoContainer extends React.Component{
     constructor(props,context){
@@ -33,8 +36,10 @@ class ToDoContainer extends React.Component{
 
     componentDidMount(){
         this.setState({isLoading:true});
+        var dom = ReactDom.findDOMNode(this)
         let lastUserState = this.state.user; //get last state of user
         let lastItemState = this.state.items; //get last state of items
+        console.log(dom);
         if(lastUserState===''){
             AuthApi.onGetUser().then((res)=>{
                 if(res.data.response){
