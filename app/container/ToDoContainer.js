@@ -120,6 +120,7 @@ class ToDoContainer extends React.Component{
             this.setState({isLoadingItem:false,count:this.state.count+1});
             toastr.error(res.data.response);
         }).catch(err=>{
+            this.setState({isLoadingItem:false});
             toastr.error('Ooops! Try again');
         }); 
     }

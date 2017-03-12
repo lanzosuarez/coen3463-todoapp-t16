@@ -110,9 +110,15 @@ router.delete('/deleteAll/:id', (req,res)=>{
             }
         });
         Todo.find((err,todos)=>{
+            let filtered=[];
+            for(let x=0;x<todos.length;x++){
+                if(req.params.id===todos[x].user.toString()){
+                    filtered.push(todos[x]);
+                }
+            }
             res.json({
                 success:true,
-                todo: todos
+                todo: filtered
             });
         }); 
     });
