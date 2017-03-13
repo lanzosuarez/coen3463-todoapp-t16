@@ -220,7 +220,8 @@ class ToDoContainer extends React.Component{
             this.setState({isUpdating:falses});
             toastr.error(res.data.response);
         }).catch(err=>{
-             toastr.error('Ooops! Try again');
+            this.setState({isUpdating:falses});
+            toastr.error('Ooops! Try again');
         });
     }
 
