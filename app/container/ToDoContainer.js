@@ -34,7 +34,7 @@ class ToDoContainer extends React.Component{
         
     }
 
-    componentDidMount(){
+    componentWillMount(){
         this.setState({isLoading:true});
         var dom = ReactDom.findDOMNode(this)
         let lastUserState = this.state.user; //get last state of user
@@ -215,6 +215,7 @@ class ToDoContainer extends React.Component{
                     completedCount:0,
                     count: res.data.todo.length
                 });
+                this.context.router.push("/todos");
                 return;
             }
             this.setState({isUpdating:falses});
