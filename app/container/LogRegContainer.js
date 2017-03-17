@@ -101,7 +101,7 @@ class LogRegContainer extends React.Component {
     onSignup(e){
         e.preventDefault();
         let elements = e.target.elements;
-        if(elements[3].value>6){
+        if(elements[3].value.length<6){
             alert("Your password must be at least 6 characters long. Please try another.");
             return;
         }
